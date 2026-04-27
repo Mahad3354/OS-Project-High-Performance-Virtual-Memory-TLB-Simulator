@@ -5,23 +5,23 @@
 using namespace std;
 
 struct Settings {
-    int ramMemorySize;
-    int sizeOfOnePage;
-    int quickCacheSize;
+    unsigned int ramMemorySize = 0;
+    unsigned int sizeOfOnePage = 1;
+    unsigned int quickCacheSize = 0;
 
-    double quickCacheDelay;
-    double ramDelay;
-    double hardDriveDelay;
+    double quickCacheDelay = 0.0;
+    double ramDelay = 0.0;
+    double hardDriveDelay = 0.0;
 
-    int getShiftAmount() const {
+    unsigned int getShiftAmount() const {
         return log2(sizeOfOnePage);
     }
 
-    int getOffsetMask() const {
+    unsigned int getOffsetMask() const {
         return sizeOfOnePage - 1;
     }
 
-    int getTotalRamFrames() const {
+    unsigned int getTotalRamFrames() const {
         return ramMemorySize / sizeOfOnePage;
     }
 };

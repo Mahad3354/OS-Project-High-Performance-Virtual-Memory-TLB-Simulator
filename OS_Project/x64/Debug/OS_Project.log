@@ -1,5 +1,10 @@
-﻿  main.cpp
-C:\Users\mahad\source\repos\OS_Project\OS_Project\Settings.h(17,20): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+﻿  FileReader.cpp
+C:\Users\mahad\source\repos\OS_Project\OS_Project\Settings.h(17,20): warning C4244: 'return': conversion from 'double' to 'unsigned int', possible loss of data
+  (compiling source file 'FileReader.cpp')
+  
+  main.cpp
+C:\Users\mahad\source\repos\OS_Project\OS_Project\Settings.h(17,20): warning C4244: 'return': conversion from 'double' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
+  Generating Code...
   OS_Project.vcxproj -> C:\Users\mahad\source\repos\OS_Project\x64\Debug\OS_Project.exe

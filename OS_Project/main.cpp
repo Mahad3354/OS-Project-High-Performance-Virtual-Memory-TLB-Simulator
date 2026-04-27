@@ -1,34 +1,36 @@
 #include "Settings.h"
-#include "ScoreBoard.h"
+#include "FileReader.h"
 #include <iostream>
+#include <unordered_map>
+#include <deque>
 
 using namespace std;
 
 int main() {
-    Settings mySettings;
+    cout << "--- Testing Step 2: FileReader ---\n\n";
 
-    mySettings.ramMemorySize = 262144;
-    mySettings.sizeOfOnePage = 4096;
-    mySettings.quickCacheSize = 16;
-    mySettings.quickCacheDelay = 1.0;
-    mySettings.ramDelay = 100.0;
-    mySettings.hardDriveDelay = 10000000.0;
+    Settings mySettings = FileReader::loadSettings("config.txt");
 
+    cout << "[Loaded Settings]\n";
     cout << "RAM Size: " << mySettings.ramMemorySize << "\n";
     cout << "Page Size: " << mySettings.sizeOfOnePage << "\n";
-    cout << "Calculated Shift: " << mySettings.getShiftAmount() << "\n";
-    cout << "Calculated Frames: " << mySettings.getTotalRamFrames() << "\n\n";
+    cout << "TLB Size: " << mySettings.quickCacheSize << "\n";
+    cout << "TLB Delay: " << mySettings.quickCacheDelay << "\n";
+    cout << "RAM Delay: " << mySettings.ramDelay << "\n";
+    cout << "Disk Delay: " << mySettings.hardDriveDelay << "\n\n";
 
-    ScoreBoard myScoreboard;
+    cout << "[Testing Future Timeline (OPT Prep)]\n";
 
-    myScoreboard.totalOperations = 1000;
-    myScoreboard.quickCacheHits = 850;
-    myScoreboard.ramHits = 100;
-    myScoreboard.misses = 50;
-    myScoreboard.hardDriveWrites = 12;
-    myScoreboard.totalTimePassed = 500000000;
+    unsigned int shift = mySettings.getShiftAmount();
+    unordered_map<unsigned int, deque<int>> futureMap = FileReader::lookIntoFuture("trace.txt", shift);
 
-    myScoreboard.showFinalScore();
+    for (auto const& pair : futureMap) {
+        cout << "Page Number " << pair.first << " is used at steps: ";
+        for (int step : pair.second) {
+            cout << step << " ";
+        }
+        cout << "\n";
+    }
 
     return 0;
 }
