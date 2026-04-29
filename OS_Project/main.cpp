@@ -1,36 +1,43 @@
-#include "Settings.h"
-#include "FileReader.h"
 #include <iostream>
 #include <unordered_map>
 #include <deque>
+#include "PageReplacer.h"
 
 using namespace std;
 
 int main() {
-    cout << "--- Testing Step 2: FileReader ---\n\n";
+    cout << "--- Testing FIFO ---\n";
+    SimpleFIFO fifo;
+    fifo.markAsUsed(1);
+    fifo.markAsUsed(2);
+    fifo.markAsUsed(3);
 
-    Settings mySettings = FileReader::loadSettings("config.txt");
+    cout << "Expected Victim: 1\n";
+    cout << "Actual Victim: " << fifo.kickOutVictim() << "\n\n";
 
-    cout << "[Loaded Settings]\n";
-    cout << "RAM Size: " << mySettings.ramMemorySize << "\n";
-    cout << "Page Size: " << mySettings.sizeOfOnePage << "\n";
-    cout << "TLB Size: " << mySettings.quickCacheSize << "\n";
-    cout << "TLB Delay: " << mySettings.quickCacheDelay << "\n";
-    cout << "RAM Delay: " << mySettings.ramDelay << "\n";
-    cout << "Disk Delay: " << mySettings.hardDriveDelay << "\n\n";
+    cout << "--- Testing LRU ---\n";
+    SimpleLRU lru;
+    lru.markAsUsed(1);
+    lru.markAsUsed(2);
+    lru.markAsUsed(3);
+    lru.markAsUsed(1);
 
-    cout << "[Testing Future Timeline (OPT Prep)]\n";
+    cout << "Expected Victim: 2\n";
+    cout << "Actual Victim: " << lru.kickOutVictim() << "\n\n";
 
-    unsigned int shift = mySettings.getShiftAmount();
-    unordered_map<unsigned int, deque<int>> futureMap = FileReader::lookIntoFuture("trace.txt", shift);
+    cout << "--- Testing OPT ---\n";
+    unordered_map<unsigned int, deque<int>> futureTimeline;
+    futureTimeline[1] = { 10 };
+    futureTimeline[2] = { 5 };
+    futureTimeline[3] = {};
 
-    for (auto const& pair : futureMap) {
-        cout << "Page Number " << pair.first << " is used at steps: ";
-        for (int step : pair.second) {
-            cout << step << " ";
-        }
-        cout << "\n";
-    }
+    FutureOPT opt(futureTimeline);
+    opt.markAsUsed(1);
+    opt.markAsUsed(2);
+    opt.markAsUsed(3);
+
+    cout << "Expected Victim: 3\n";
+    cout << "Actual Victim: " << opt.kickOutVictim() << "\n";
 
     return 0;
 }
