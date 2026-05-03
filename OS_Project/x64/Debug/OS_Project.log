@@ -1,2 +1,20 @@
-﻿  main.cpp
+﻿  generator.cpp
+C:\Users\mahad\source\repos\OS_Project\OS_Project\generator.cpp(10,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  main.cpp
+C:\Users\mahad\source\repos\OS_Project\OS_Project\Settings.h(17,20): warning C4244: 'return': conversion from 'double' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+C:\Users\mahad\source\repos\OS_Project\OS_Project\MemoryManager.h(61,51): warning C4244: '+=': conversion from 'double' to '__int64', possible loss of data
+  (compiling source file 'main.cpp')
+  
+C:\Users\mahad\source\repos\OS_Project\OS_Project\MemoryManager.h(74,59): warning C4244: '+=': conversion from 'double' to '__int64', possible loss of data
+  (compiling source file 'main.cpp')
+  
+C:\Users\mahad\source\repos\OS_Project\OS_Project\MemoryManager.h(99,51): warning C4244: '+=': conversion from 'double' to '__int64', possible loss of data
+  (compiling source file 'main.cpp')
+  
+C:\Users\mahad\source\repos\OS_Project\OS_Project\MemoryManager.h(107,55): warning C4244: '+=': conversion from 'double' to '__int64', possible loss of data
+  (compiling source file 'main.cpp')
+  
+  Generating Code...
   OS_Project.vcxproj -> C:\Users\mahad\source\repos\OS_Project\x64\Debug\OS_Project.exe
